@@ -17,7 +17,8 @@ class LocaleString extends Translations {
           'accessGallery': 'Access gallery',
           'editProfile': 'Edit Profile',
           'home': 'Home',
-          'scan': 'Scan'
+          'scan': 'Scan',
+          'Explore': 'Explore'
         },
         "kn_IN": {
           'rova-23': 'ರೋವಾ-೨೩',
@@ -32,7 +33,8 @@ class LocaleString extends Translations {
           'chooseOption': 'ಒಂದು ಆಯ್ಕೆಯನ್ನು ಆರಿಸಿ',
           'takePhoto': 'ಫೋಟೋ ತೆಗೆಯಿರಿ',
           'partlyCloudy': 'ಭಾಗಶಃ ಮೋಡ',
-          'accessGallery': 'ಗ್ಯಾಲರಿ ತೆರೆಯಿರಿ'
+          'accessGallery': 'ಗ್ಯಾಲರಿ ತೆರೆಯಿರಿ',
+          'Explore': 'ಅನ್ವೇಷಿಸಿ'
         },
         "hi_IN": {
           "appTitle": 'रोवा-23',
@@ -49,7 +51,8 @@ class LocaleString extends Translations {
           'takePhoto': 'फोटो लो',
           'rova-23': 'रोवा-23',
           'accessGallery': 'गैलरी तक पहुंचें',
-          'partlyCloudy': 'आंशिक रूप से बादल छाएंगे'
+          'partlyCloudy': 'आंशिक रूप से बादल छाएंगे',
+          'Explore': 'अन्वेषण करना'
         },
         "te_IN": {
           'chooseOption': 'ఒక ఎంపికను ఎంచుకోండి',
@@ -66,7 +69,8 @@ class LocaleString extends Translations {
           'accessGallery': 'యాక్సెస్ గ్యాలరీ',
           'editProfile': 'ప్రొఫైల్ని సవరించు',
           'home': 'హోమ్',
-          'scan': 'స్కాన్'
+          'scan': 'స్కాన్',
+          'Explore': 'అన్వేషించండి'
         }
       };
 }

@@ -401,7 +401,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  'My Crops',
+                  'Explore'.tr,
                   style: TextStyle(fontSize: 30.0),
                 ),
                 SizedBox(height: 35.0),
@@ -497,99 +497,98 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
           endDrawer: Drawer(
+            
             child: Column(
               children: [
                 Container(
                   width: 307,
                   color: Color.fromARGB(255, 232, 239, 232),
                   child: Column(
+                    mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      UserAccountsDrawerHeader(
-                        accountName: Text(
-                          'Acelucid',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        accountEmail: Text(
-                          '12345678999',
-                          style: TextStyle(
-                            fontSize: 14.0,
-                          ),
-                        ),
-                        currentAccountPicture: CircleAvatar(
-                          backgroundImage: NetworkImage(
-                            'https://example.com/path-to-your-image.jpg',
-                          ),
-                        ),
+                      Container(
+                        height: 130.0,
                         decoration: BoxDecoration(
                           color: Color.fromARGB(255, 144, 152, 145),
                         ),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                radius: 35.0,
+                                backgroundImage: AssetImage('images/logo.png'),
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 10.0),
+                                Text(
+                                  'Acelucid',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                Text(
+                                  '+91 1231231239',
+                                  style: TextStyle(
+                                    fontSize: 14.0,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Expanded(
+                              child: Container(),
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: IconButton(
+                                icon: Icon(Icons.edit),
+                                onPressed: _showEditProfileDialog,
+                                iconSize: 20.0,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      _buildDrawerItem(Icons.edit, 'Edit Profile',
-                          onPressed: _showEditProfileDialog),
-                      _buildExpansionTile(Icons.settings, 'Settings',
-                          onPressed: () {}),
-                      _buildExpansionTile(Icons.support, 'Support',
-                          onPressed: () {}),
-                      _buildExpansionTile(Icons.logout, 'Logout',
-                          onPressed: _showLogoutDialog),
+                      _buildExpansionTile(Icons.settings, 'Settings'),
+                      _buildExpansionTile(Icons.logout, 'Logout'),
+                    ],
+                  ),
+                )
+                ],
+            ),
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Divider(
+                        color: Color.fromARGB(255, 236, 243, 236),
+                        thickness: 1.0,
+                      ),
+                      SizedBox(height: 8.0),
+                      _buildDrawerItem(Icons.star, 'Rate app'),
+                      _buildDrawerItem(
+                          Icons.description, 'Terms and conditions'),
                     ],
                   ),
                 ),
-                Expanded(
-                  child: Align(
-                    alignment: FractionalOffset.bottomLeft,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Divider(
-                            color: Color.fromARGB(255, 236, 243, 236),
-                            thickness: 1.0,
-                          ),
-                          SizedBox(height: 8.0),
-                          _buildDrawerItem(Icons.star, 'Rate app'),
-                          _buildDrawerItem(
-                              Icons.description, 'Terms and conditions'),
-                          _buildDrawerItem(Icons.contact_mail, 'Contact us'),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
-        ));
-  }
-
-  Future<bool> _onBackPressed() async {
-    print("Back button pressed");
-    return (await showDialog<bool>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Are you sure?'),
-            content: Text('Do you want to exit the app?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: Text('No'),
-              ),
-              TextButton(
-                onPressed: () {
-                  print("Yes pressed");
-                  exit(0);
-                },
-                child: Text('Yes'),
-              ),
-            ],
-          ),
-        )) ??
-        false; // Provide a default value of 'false' if null is returned
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _buildDrawerItem(IconData icon, String label,
@@ -618,73 +617,92 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildExpansionTile(IconData icon, String label,
-      {required void Function() onPressed}) {
-    return ExpansionTile(
-      leading: Icon(
-        icon,
-        color: Color.fromARGB(255, 95, 173, 43),
-      ),
-      title: Text(
-        label,
-        style: TextStyle(
-          fontSize: 18.0,
-          color: Color.fromARGB(255, 16, 16, 16),
-        ),
-      ),
-      children: _buildExpansionTileChildren(label),
+  Future<void> _showLogoutConfirmationDialog() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout Confirmation'),
+          content: Text('Are you sure you want to logout?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  List<Widget> _buildExpansionTileChildren(String label) {
-    switch (label) {
-      case 'Settings':
-        return [
-          ListTile(
-            title: Text('General'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SettingsScreen(),
-                ),
-              );
-            },
+  Widget _buildExpansionTile(IconData icon, String label) {
+    if (label == 'Settings') {
+      return ListTile(
+        leading: Icon(
+          icon,
+          color: Color.fromARGB(255, 95, 173, 43),
+        ),
+        title: Text(
+          label,
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Color.fromARGB(255, 16, 16, 16),
           ),
-        ];
-      case 'Support':
-        return [
-          ListTile(
-            title: Text('Contact Support'),
-            onTap: () {
-              // Add functionality to contact support
-            },
+        ),
+        onTap: () {
+          Navigator.pop(context);
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SettingsScreen(),
+            ),
+          );
+        },
+      );
+    } else if (label == 'Logout') {
+      return ListTile(
+        leading: Icon(
+          icon,
+          color: Color.fromARGB(255, 95, 173, 43),
+        ),
+        title: Text(
+          label,
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Color.fromARGB(255, 16, 16, 16),
           ),
-        ];
-      case 'Edit Profile':
-        return [
-          ListTile(
-            title: Text('Update Profile'),
-            onTap: () {
-              // Add functionality to update user profile
-              Navigator.pop(context); // Close the drawer
-              _showEditProfileDialog();
-            },
+        ),
+        onTap: () {
+          Navigator.pop(context);
+          _showLogoutConfirmationDialog();
+        },
+      );
+    } else {
+      return ExpansionTile(
+        leading: Icon(
+          icon,
+          color: Color.fromARGB(255, 95, 173, 43),
+        ),
+        title: Text(
+          label,
+          style: TextStyle(
+            fontSize: 18.0,
+            color: Color.fromARGB(255, 16, 16, 16),
           ),
-        ];
-      case 'Logout':
-        return [
-          ListTile(
-            title: Text('Logout'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-              _showLogoutDialog();
-            },
-          ),
-        ];
-      default:
-        return [];
+        ),
+        children: _buildExpansionTileChildren(label),
+      );
     }
   }
+
+  _buildExpansionTileChildren(String label) {}
 }
